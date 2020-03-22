@@ -1,0 +1,2 @@
+rootProject.name='Foreign Lands'
+include ':app'
