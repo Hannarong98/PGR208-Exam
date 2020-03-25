@@ -8,7 +8,6 @@ import android.os.Parcelable
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class Properties(
-    val icon: String,
     val id: String,
     val name: String
 ) : Parcelable

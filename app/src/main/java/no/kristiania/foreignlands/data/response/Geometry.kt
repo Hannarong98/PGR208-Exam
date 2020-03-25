@@ -8,6 +8,5 @@ import android.os.Parcelable
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class Geometry(
-    val coordinates: List<Double>,
-    val type: String
+    val coordinates: List<Double>
 ) : Parcelable

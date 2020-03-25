@@ -8,6 +8,5 @@ import android.os.Parcelable
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class ApiResponse(
-    val features: List<Feature>,
-    val type: String
+    val features: List<Feature>
 ) : Parcelable
