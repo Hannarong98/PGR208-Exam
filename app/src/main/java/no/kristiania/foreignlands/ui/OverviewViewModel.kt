@@ -18,7 +18,7 @@ class OverviewViewModel(
         get() = _overviews
 
     fun getOverviews() {
-        job = Coroutines.ioToMain(
+        job = Coroutines.fromIOToMain(
             { repository.getPlaces() },
             {
                 _overviews.value = it
