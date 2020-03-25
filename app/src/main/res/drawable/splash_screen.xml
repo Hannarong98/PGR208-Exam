@@ -3,7 +3,7 @@
     android:opacity="opaque">
     <item android:drawable="@color/colorPrimary" />
     <item
-        android:drawable="@drawable/illustrator"
+        android:drawable="@drawable/ic_app_logo"
         android:gravity="center" />
 
 </layer-list>
