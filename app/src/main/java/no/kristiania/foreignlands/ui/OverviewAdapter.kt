@@ -1,4 +1,4 @@
-package no.kristiania.foreignlands
+package no.kristiania.foreignlands.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.places_row.view.*
+import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.response.ApiResponse
 
-class PlaceAdapter(private val places: ApiResponse) : RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
+class OverviewAdapter(private val places: ApiResponse) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.places_row, parent, false)
         return ViewHolder(view)
