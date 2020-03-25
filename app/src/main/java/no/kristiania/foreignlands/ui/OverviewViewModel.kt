@@ -1,11 +1,11 @@
-package com.example.foreignlands.ui
+package no.kristiania.foreignlands.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.foreignlands.Coroutines
-import com.example.foreignlands.data.repository.OverviewRepository
-import com.example.foreignlands.data.response.ApiResponse
+import no.kristiania.foreignlands.Coroutines
+import no.kristiania.foreignlands.data.repository.OverviewRepository
+import no.kristiania.foreignlands.data.response.ApiResponse
 import kotlinx.coroutines.Job
 
 class OverviewViewModel(

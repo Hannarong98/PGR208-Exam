@@ -1,8 +1,7 @@
-package com.example.foreignlands.data
+package no.kristiania.foreignlands.data
 
 import retrofit2.Response
 import java.io.IOException
-import java.lang.Exception
 
 abstract class SafeApiRequest {
 

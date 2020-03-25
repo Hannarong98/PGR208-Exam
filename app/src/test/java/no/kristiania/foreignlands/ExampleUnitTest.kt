@@ -1,4 +1,4 @@
-package com.example.foreignlands
+package no.kristiania.foreignlands
 
 import org.junit.Test
 

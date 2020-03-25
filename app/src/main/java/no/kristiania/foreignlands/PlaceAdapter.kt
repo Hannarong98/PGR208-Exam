@@ -1,14 +1,12 @@
-package com.example.foreignlands
+package no.kristiania.foreignlands
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foreignlands.data.TestData
-import com.example.foreignlands.data.response.ApiResponse
-import com.example.foreignlands.data.response.Feature
 import kotlinx.android.synthetic.main.places_row.view.*
+import no.kristiania.foreignlands.data.response.ApiResponse
 
 class PlaceAdapter(private val places: ApiResponse) : RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

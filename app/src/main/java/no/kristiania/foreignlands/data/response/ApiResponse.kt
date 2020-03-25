@@ -1,15 +1,13 @@
-package com.example.foreignlands.data.response
+package no.kristiania.foreignlands.data.response
 
 
 import android.annotation.SuppressLint
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import android.os.Parcelable
 
 @SuppressLint("ParcelCreator")
 @Parcelize
-data class Feature(
-    val geometry: Geometry,
-    val properties: Properties,
+data class ApiResponse(
+    val features: List<Feature>,
     val type: String
 ) : Parcelable

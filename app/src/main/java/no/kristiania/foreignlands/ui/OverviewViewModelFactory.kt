@@ -1,8 +1,8 @@
-package com.example.foreignlands.ui
+package no.kristiania.foreignlands.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.foreignlands.data.repository.OverviewRepository
+import no.kristiania.foreignlands.data.repository.OverviewRepository
 
 @Suppress("UNCHECKED_CAST")
 class OverviewViewModelFactory(

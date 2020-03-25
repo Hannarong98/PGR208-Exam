@@ -1,4 +1,4 @@
-package com.example.foreignlands
+package no.kristiania.foreignlands
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

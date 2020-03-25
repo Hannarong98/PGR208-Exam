@@ -1,13 +1,11 @@
-package com.example.foreignlands.data
+package no.kristiania.foreignlands.data
 
 
-import com.example.foreignlands.data.response.ApiResponse
-import retrofit2.Call
+import no.kristiania.foreignlands.data.response.ApiResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import kotlin.contracts.Returns
 
 interface NoForeignLandsApiService {
     @GET("/home/api/v1/places")

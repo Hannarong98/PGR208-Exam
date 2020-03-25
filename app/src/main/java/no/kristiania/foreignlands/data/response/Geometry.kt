@@ -1,8 +1,7 @@
-package com.example.foreignlands.data.response
+package no.kristiania.foreignlands.data.response
 
 
 import android.annotation.SuppressLint
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import android.os.Parcelable
 
