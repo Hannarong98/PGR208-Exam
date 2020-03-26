@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.overview_fragment.*
+import no.kristiania.foreignlands.OverviewAdapter
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.repository.OverviewRepository
