@@ -2,6 +2,7 @@ package no.kristiania.foreignlands
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import no.kristiania.foreignlands.data.repository.DetailsRepository
 
 
 class MainActivity : AppCompatActivity() {

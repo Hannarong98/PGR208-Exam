@@ -1,10 +1,10 @@
-package no.kristiania.foreignlands.ui
+package no.kristiania.foreignlands.ui.overviews
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 import no.kristiania.foreignlands.data.repository.OverviewRepository
-import no.kristiania.foreignlands.data.response.Feature
+import no.kristiania.foreignlands.data.model.overviews.Feature
 import kotlin.coroutines.CoroutineContext
 
 // The code was based on this article: https://android.jlelse.eu/android-networking-in-2019-retrofit-with-kotlins-coroutines-aefe82c4d777

@@ -1,4 +1,4 @@
-package no.kristiania.foreignlands.ui
+package no.kristiania.foreignlands.ui.overviews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +9,8 @@ class OverviewViewModelFactory(
     private val repository : OverviewRepository
 ): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return OverviewViewModel(repository) as T
+        return OverviewViewModel(
+            repository
+        ) as T
     }
 }

@@ -1,4 +1,4 @@
-package no.kristiania.foreignlands
+package no.kristiania.foreignlands.ui.overviews
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.places_row.view.*
-import no.kristiania.foreignlands.data.response.Feature
+import no.kristiania.foreignlands.R
+import no.kristiania.foreignlands.data.model.overviews.Feature
 import java.util.*
 
 class OverviewAdapter(private var places: MutableList<Feature>, var onClickListener: View.OnClickListener? = null) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {

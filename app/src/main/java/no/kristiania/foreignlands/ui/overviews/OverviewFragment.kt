@@ -1,18 +1,15 @@
-package no.kristiania.foreignlands.ui
+package no.kristiania.foreignlands.ui.overviews
 
-import android.app.Application
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.overview_fragment.*
-import no.kristiania.foreignlands.OverviewAdapter
 import no.kristiania.foreignlands.R
-import no.kristiania.foreignlands.data.NoForeignLandsApiService
+import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.repository.OverviewRepository
 
 class OverviewFragment : Fragment(), View.OnClickListener {
@@ -34,13 +31,20 @@ class OverviewFragment : Fragment(), View.OnClickListener {
         super.onActivityCreated(savedInstanceState)
         val api = NoForeignLandsApiService()
         val repository = OverviewRepository(api)
-        factory = OverviewViewModelFactory(repository)
+        factory =
+            OverviewViewModelFactory(
+                repository
+            )
         viewModel = ViewModelProviders.of(this, factory).get(OverviewViewModel::class.java)
         viewModel.fetchPlaces()
         viewModel.placesLiveData.observe(viewLifecycleOwner, Observer { places ->
             recycler_view_overviews.also {
                 it.layoutManager = LinearLayoutManager(requireContext())
-                adapter = OverviewAdapter(places, this)
+                adapter =
+                    OverviewAdapter(
+                        places,
+                        this
+                    )
                 it.adapter = adapter
             }
         }
