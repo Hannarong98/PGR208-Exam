@@ -1,33 +1,36 @@
 package no.kristiania.foreignlands.ui
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import no.kristiania.foreignlands.Coroutines
+import kotlinx.coroutines.*
 import no.kristiania.foreignlands.data.repository.OverviewRepository
-import no.kristiania.foreignlands.data.response.ApiResponse
-import kotlinx.coroutines.Job
+import no.kristiania.foreignlands.data.response.Feature
+import kotlin.coroutines.CoroutineContext
 
-class OverviewViewModel(
-    private val repository: OverviewRepository
-) : ViewModel() {
-    private lateinit var job: Job
+// The code was based on this article: https://android.jlelse.eu/android-networking-in-2019-retrofit-with-kotlins-coroutines-aefe82c4d777
+// With some minor adjustment
 
-    private val _overviews = MutableLiveData<ApiResponse>()
-    val overviews: LiveData<ApiResponse>
-        get() = _overviews
 
-    fun getOverviews() {
-        job = Coroutines.fromIOToMain(
-            { repository.getPlaces() },
-            {
-                _overviews.value = it
-            }
-        )
+class OverviewViewModel(private val repository: OverviewRepository) : ViewModel() {
+
+    private val parentJob = Job()
+
+    private val coroutineContext: CoroutineContext
+        get() = parentJob + Dispatchers.Default
+
+    private val scope = CoroutineScope(coroutineContext)
+
+
+
+    val placesLiveData = MutableLiveData<MutableList<Feature>>()
+
+    fun fetchPlaces(){
+        scope.launch {
+            val places = repository.getPlaces()
+            placesLiveData.postValue(places)
+        }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        if(::job.isInitialized) job.cancel()
-    }
+
+    fun cancelAllRequests() = coroutineContext.cancel()
 }

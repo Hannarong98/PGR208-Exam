@@ -1,9 +1,10 @@
 package no.kristiania.foreignlands.ui
 
+import android.app.Application
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,15 +15,18 @@ import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.repository.OverviewRepository
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : Fragment(), View.OnClickListener {
+
 
     private lateinit var factory: OverviewViewModelFactory
     private lateinit var viewModel: OverviewViewModel
+    private lateinit var adapter: OverviewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.overview_fragment, container, false)
     }
 
@@ -32,13 +36,40 @@ class OverviewFragment : Fragment() {
         val repository = OverviewRepository(api)
         factory = OverviewViewModelFactory(repository)
         viewModel = ViewModelProviders.of(this, factory).get(OverviewViewModel::class.java)
-        viewModel.getOverviews()
-        viewModel.overviews.observe(viewLifecycleOwner, Observer { places ->
+        viewModel.fetchPlaces()
+        viewModel.placesLiveData.observe(viewLifecycleOwner, Observer { places ->
             recycler_view_overviews.also {
                 it.layoutManager = LinearLayoutManager(requireContext())
-                it.adapter = OverviewAdapter(places)
+                adapter = OverviewAdapter(places, this)
+                it.adapter = adapter
             }
+        }
+        )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        val item = menu.findItem(R.id.action_search)
+        val searchView = item?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
         })
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onClick(v: View?) {
+        TODO()
     }
 
 }

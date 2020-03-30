@@ -5,12 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.places_row.view.*
-import no.kristiania.foreignlands.data.response.ApiResponse
+import no.kristiania.foreignlands.data.response.Feature
+import java.util.*
 
-class OverviewAdapter(private val places: ApiResponse) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
+class OverviewAdapter(private var places: MutableList<Feature>, var onClickListener: View.OnClickListener? = null) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
+
+   private var searchList: MutableList<Feature> = places
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,20 +21,52 @@ class OverviewAdapter(private val places: ApiResponse) : RecyclerView.Adapter<Ov
         return ViewHolder(view)
     }
 
-    override fun getItemCount() = places.features.size
+    override fun getItemCount() = places.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = places.features[position].properties.name
-        holder.id.text = places.features[position].properties.id
-
+        holder.bindViewHolder(places[position])
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val name: TextView = itemView.place_name
-        val id: TextView = itemView.place_id
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        fun bindViewHolder(item: Feature){
+            itemView.place_name.text = item.properties.name
+            itemView.place_id.text = item.properties.id
+            itemView.setOnClickListener(onClickListener)
+        }
     }
 
     override fun getFilter(): Filter {
-        TODO("Not yet implemented")
+        return object : Filter(){
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val listTemp = searchList
+                val filterResults = FilterResults()
+                val resultList: MutableList<Feature> = ArrayList()
+                if(charSequence.isEmpty()) {
+                    resultList.addAll(listTemp)
+                } else {
+
+                    val searchString = charSequence.toString().trim()
+
+                    listTemp.filter {
+                        it.properties.name.contains(searchString, ignoreCase = true)
+                    }.forEach {
+                        resultList.add(it)
+                    }
+                }
+
+                filterResults.values = resultList
+                return filterResults
+            }
+
+            override fun publishResults(c: CharSequence, result: FilterResults) {
+                val newList: MutableList<Feature>? = result.values as MutableList<Feature>
+                if(!newList.isNullOrEmpty()) {
+                    places = newList
+                    notifyDataSetChanged()
+                }
+            }
+
+
+        }
     }
 }
