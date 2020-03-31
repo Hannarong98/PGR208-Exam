@@ -7,13 +7,15 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface NoForeignLandsApiService {
     @GET("/home/api/v1/places")
     suspend fun getOverviews(): Response<OverviewResponse>
 
-    @GET("home/api/v1/place?id=4776700298657792")
-    suspend fun getDetail(): Response<DetailsResponse>
+    @GET("home/api/v1/place?id={id}")
+    suspend fun getDetail(@Path("id") id: Long): Response<DetailsResponse>
 
     companion object {
         operator fun invoke() : NoForeignLandsApiService {

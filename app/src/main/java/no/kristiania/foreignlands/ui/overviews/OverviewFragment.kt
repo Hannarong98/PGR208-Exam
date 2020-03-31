@@ -1,7 +1,9 @@
 package no.kristiania.foreignlands.ui.overviews
 
 import android.os.Bundle
+import android.util.Log.e
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,11 +21,9 @@ class OverviewFragment : Fragment(), View.OnClickListener {
     private lateinit var viewModel: OverviewViewModel
     private lateinit var adapter: OverviewAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
+
         return inflater.inflate(R.layout.overview_fragment, container, false)
     }
 
@@ -40,11 +40,7 @@ class OverviewFragment : Fragment(), View.OnClickListener {
         viewModel.placesLiveData.observe(viewLifecycleOwner, Observer { places ->
             recycler_view_overviews.also {
                 it.layoutManager = LinearLayoutManager(requireContext())
-                adapter =
-                    OverviewAdapter(
-                        places,
-                        this
-                    )
+                adapter = OverviewAdapter(places, this)
                 it.adapter = adapter
             }
         }
@@ -73,7 +69,7 @@ class OverviewFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        TODO()
+        e("Onclick", "CLICKED")
     }
 
 }

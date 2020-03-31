@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.detail_fragment.*
 
 import no.kristiania.foreignlands.R
 
@@ -27,7 +29,11 @@ class DetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel.fetchDetails()
+        viewModel.placeDetailLiveData.observe(viewLifecycleOwner, Observer {place ->
+
+        })
+
     }
 
 }
