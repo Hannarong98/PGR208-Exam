@@ -7,7 +7,7 @@ import android.os.Parcelable
 
 @SuppressLint("ParcelCreator")
 @Parcelize
-data class Feature(
+data class Places(
     val geometry: Geometry,
     val properties: Properties
 ) : Parcelable

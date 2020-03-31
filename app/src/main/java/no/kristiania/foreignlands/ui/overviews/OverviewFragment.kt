@@ -3,16 +3,20 @@ package no.kristiania.foreignlands.ui.overviews
 import android.os.Bundle
 import android.util.Log.e
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.common.Feature
 import kotlinx.android.synthetic.main.overview_fragment.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
+import no.kristiania.foreignlands.data.model.overviews.Places
 import no.kristiania.foreignlands.data.repository.OverviewRepository
+import no.kristiania.foreignlands.ui.details.DetailFragment
 
 class OverviewFragment : Fragment(), View.OnClickListener {
 
@@ -20,11 +24,16 @@ class OverviewFragment : Fragment(), View.OnClickListener {
     private lateinit var factory: OverviewViewModelFactory
     private lateinit var viewModel: OverviewViewModel
     private lateinit var adapter: OverviewAdapter
+    private var navController: NavController? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
-
         return inflater.inflate(R.layout.overview_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -69,7 +78,11 @@ class OverviewFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        e("Onclick", "CLICKED")
+        val placeItem = v?.tag as Places
+        val id = placeItem.properties.id
+        e("onclick", id)
+        val destination = OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(id)
+        navController!!.navigate(destination)
     }
 
 }

@@ -6,9 +6,19 @@
     tools:context=".ui.details.DetailFragment">
 
     <TextView
-        android:id="@+id/place_name"
+        android:id="@+id/detail_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:text="Hello World" />
+
+    <TextView
+        android:id="@+id/place_detail_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/place_detail_desc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

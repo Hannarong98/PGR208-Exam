@@ -14,8 +14,8 @@ interface NoForeignLandsApiService {
     @GET("/home/api/v1/places")
     suspend fun getOverviews(): Response<OverviewResponse>
 
-    @GET("home/api/v1/place?id={id}")
-    suspend fun getDetail(@Path("id") id: Long): Response<DetailsResponse>
+    @GET("home/api/v1/place")
+    suspend fun getDetail(@Query("id") id: String): Response<DetailsResponse>
 
     companion object {
         operator fun invoke() : NoForeignLandsApiService {

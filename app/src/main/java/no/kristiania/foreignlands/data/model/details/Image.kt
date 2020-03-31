@@ -14,7 +14,7 @@ data class Image(
     @SerializedName("height")
     val height: Int,
     @SerializedName("id")
-    val id: Long,
+    val id: String,
     @SerializedName("likes")
     val likes: List<Long>,
     @SerializedName("servingUrl")

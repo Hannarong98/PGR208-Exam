@@ -8,12 +8,12 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.places_row.view.*
 import no.kristiania.foreignlands.R
-import no.kristiania.foreignlands.data.model.overviews.Feature
+import no.kristiania.foreignlands.data.model.overviews.Places
 import java.util.*
 
-class OverviewAdapter(private var places: MutableList<Feature>, var onClickListener: View.OnClickListener? = null) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
+class OverviewAdapter(private var places: MutableList<Places>, var onClickListener: View.OnClickListener? = null) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
 
-   private var searchList: MutableList<Feature> = places
+   private var searchList: MutableList<Places> = places
 
 
 
@@ -29,9 +29,12 @@ class OverviewAdapter(private var places: MutableList<Feature>, var onClickListe
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bindViewHolder(item: Feature){
+        fun bindViewHolder(item: Places){
             itemView.place_name.text = item.properties.name
             itemView.place_id.text = item.properties.id
+
+            itemView.tag = item
+
             itemView.setOnClickListener(onClickListener)
         }
     }
@@ -41,7 +44,7 @@ class OverviewAdapter(private var places: MutableList<Feature>, var onClickListe
             override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val listTemp = searchList
                 val filterResults = FilterResults()
-                val resultList: MutableList<Feature> = ArrayList()
+                val resultList: MutableList<Places> = ArrayList()
                 if(charSequence.isEmpty()) {
                     resultList.addAll(listTemp)
                 } else {
@@ -60,7 +63,7 @@ class OverviewAdapter(private var places: MutableList<Feature>, var onClickListe
             }
 
             override fun publishResults(c: CharSequence, result: FilterResults) {
-                val newList: MutableList<Feature>? = result.values as MutableList<Feature>
+                val newList: MutableList<Places>? = result.values as MutableList<Places>
                 if(!newList.isNullOrEmpty()) {
                     places = newList
                     notifyDataSetChanged()

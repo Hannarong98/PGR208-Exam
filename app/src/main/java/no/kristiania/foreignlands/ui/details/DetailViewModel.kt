@@ -20,9 +20,9 @@ class DetailViewModel(private val repository: DetailsRepository) : ViewModel() {
 
     val placeDetailLiveData = MutableLiveData<Place>()
 
-    fun fetchDetails() {
+    fun fetchDetails(id: String) {
         scope.launch {
-            val detail = repository.getPlaceDetails()
+            val detail = repository.getPlaceDetails(id)
             placeDetailLiveData.postValue(detail)
         }
     }

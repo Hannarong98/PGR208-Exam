@@ -10,6 +10,9 @@ import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.detail_fragment.*
 
 import no.kristiania.foreignlands.R
+import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
+import no.kristiania.foreignlands.data.repository.DetailsRepository
+import no.kristiania.foreignlands.data.repository.OverviewRepository
 
 class DetailFragment : Fragment() {
 
@@ -28,10 +31,17 @@ class DetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        viewModel.fetchDetails()
-        viewModel.placeDetailLiveData.observe(viewLifecycleOwner, Observer {place ->
 
+        val api = NoForeignLandsApiService()
+        val repository = DetailsRepository(api)
+        val factory = DetailViewModelFactory(repository)
+        val id = DetailFragmentArgs.fromBundle(arguments!!).placeID
+
+        viewModel = ViewModelProviders.of(this, factory).get(DetailViewModel::class.java)
+        viewModel.fetchDetails(id)
+        viewModel.placeDetailLiveData.observe(viewLifecycleOwner, Observer { place ->
+            place_detail_desc.text = place.comments
+            place_detail_name.text = place.name
         })
 
     }
