@@ -9,7 +9,7 @@ import org.junit.runner.RunWith
 import org.junit.Assert.*
 
 /**
- * Instrumented splash_logo, which will execute on an Android device.
+ * Instrumented ic_splash_logo, which will execute on an Android device.
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
@@ -17,7 +17,7 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the app under splash_logo.
+        // Context of the app under ic_splash_logo.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.example.foreignlands", appContext.packageName)
     }

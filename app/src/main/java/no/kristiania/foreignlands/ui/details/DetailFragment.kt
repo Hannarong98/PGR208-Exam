@@ -1,18 +1,19 @@
 package no.kristiania.foreignlands.ui.details
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.detail_fragment.*
-
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.repository.DetailsRepository
-import no.kristiania.foreignlands.data.repository.OverviewRepository
+
 
 class DetailFragment : Fragment() {
 
@@ -37,11 +38,23 @@ class DetailFragment : Fragment() {
         val factory = DetailViewModelFactory(repository)
         val id = DetailFragmentArgs.fromBundle(arguments!!).placeID
 
+
+
         viewModel = ViewModelProviders.of(this, factory).get(DetailViewModel::class.java)
         viewModel.fetchDetails(id)
         viewModel.placeDetailLiveData.observe(viewLifecycleOwner, Observer { place ->
-            place_detail_desc.text = place.comments
-            place_detail_name.text = place.name
+            detail_description.text = place.comments.replace("<[^>]*>".toRegex(),"")
+                                                    .replace("&[a-z]+;".toRegex(), "")
+            detail_name.text = place.name
+            if(place.images.isNotEmpty()){
+                Glide.with(this)
+                    .load(place.banner)
+                    .into(detail_image)
+            } else {
+                Glide.with(this)
+                    .load(R.drawable.img_placeholder)
+                    .into(detail_image)
+            }
         })
 
     }

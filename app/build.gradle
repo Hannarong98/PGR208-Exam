@@ -20,7 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.splash_logo.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.ic_splash_logo.runner.AndroidJUnitRunner"
     }
 
     buildTypes {

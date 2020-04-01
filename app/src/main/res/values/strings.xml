@@ -2,4 +2,6 @@
     <string name="app_name">Foreign Lands</string>
     <string name="pin">Pin</string>
     <string name="search">Search</string>
+    <string name="place_image">Place Image</string>
+    <string name="description_placeholder">Reminders, such as the notes on the message board, reinforce the feeling that something that intrinsically belongs here just is not here. There is also a heightened sense of anticipation. It is as if the room itself is asking, Where has everyone gone and when will they be back?</string>
 </resources>

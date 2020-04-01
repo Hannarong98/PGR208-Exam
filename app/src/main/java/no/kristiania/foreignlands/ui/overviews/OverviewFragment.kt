@@ -31,10 +31,13 @@ class OverviewFragment : Fragment(), View.OnClickListener {
         return inflater.inflate(R.layout.overview_fragment, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
     }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -44,7 +47,7 @@ class OverviewFragment : Fragment(), View.OnClickListener {
             OverviewViewModelFactory(
                 repository
             )
-        viewModel = ViewModelProviders.of(this, factory).get(OverviewViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, factory).get(OverviewViewModel::class.java)
         viewModel.fetchPlaces()
         viewModel.placesLiveData.observe(viewLifecycleOwner, Observer { places ->
             recycler_view_overviews.also {
@@ -80,7 +83,6 @@ class OverviewFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         val placeItem = v?.tag as Places
         val id = placeItem.properties.id
-        e("onclick", id)
         val destination = OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(id)
         navController!!.navigate(destination)
     }
