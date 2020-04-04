@@ -1,7 +1,6 @@
 package no.kristiania.foreignlands.ui.overviews
 
 import android.os.Bundle
-import android.util.Log.e
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -10,13 +9,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.common.Feature
 import kotlinx.android.synthetic.main.overview_fragment.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.model.overviews.Places
 import no.kristiania.foreignlands.data.repository.OverviewRepository
-import no.kristiania.foreignlands.ui.details.DetailFragment
 
 class OverviewFragment : Fragment(), View.OnClickListener {
 
@@ -36,8 +33,6 @@ class OverviewFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
     }
-
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

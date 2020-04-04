@@ -46,7 +46,7 @@ class DetailFragment : Fragment() {
             detail_description.text = place.comments.replace("<[^>]*>".toRegex(),"")
                                                     .replace("&[a-z]+;".toRegex(), "")
             detail_name.text = place.name
-            if(place.images.isNotEmpty()){
+            if(place.banner.isNotBlank()){
                 Glide.with(this)
                     .load(place.banner)
                     .into(detail_image)
