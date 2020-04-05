@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.detail_fragment.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
@@ -16,10 +15,6 @@ import no.kristiania.foreignlands.data.repository.DetailsRepository
 
 
 class DetailFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
 
     private lateinit var viewModel: DetailViewModel
 
@@ -43,7 +38,15 @@ class DetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, factory).get(DetailViewModel::class.java)
         viewModel.fetchDetails(id)
         viewModel.placeDetailLiveData.observe(viewLifecycleOwner, Observer { place ->
-            detail_description.text = place.comments.replace("(<[^>]*>)|(&[a-z]+;)".toRegex(),"")
+
+            var placeComment = place.comments.replace("(<[^>]*>)|(&[a-z]+;)".toRegex(),"")
+
+            if (placeComment.isEmpty()) {
+                placeComment = getString(R.string.place_no_description)
+                detail_description.text = placeComment
+            }
+
+            detail_description.text = placeComment
             detail_name.text = place.name
             if(place.banner.isNotBlank()){
                 Glide.with(this)
