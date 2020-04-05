@@ -43,8 +43,7 @@ class DetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, factory).get(DetailViewModel::class.java)
         viewModel.fetchDetails(id)
         viewModel.placeDetailLiveData.observe(viewLifecycleOwner, Observer { place ->
-            detail_description.text = place.comments.replace("<[^>]*>".toRegex(),"")
-                                                    .replace("&[a-z]+;".toRegex(), "")
+            detail_description.text = place.comments.replace("(<[^>]*>)|(&[a-z]+;)".toRegex(),"")
             detail_name.text = place.name
             if(place.banner.isNotBlank()){
                 Glide.with(this)
