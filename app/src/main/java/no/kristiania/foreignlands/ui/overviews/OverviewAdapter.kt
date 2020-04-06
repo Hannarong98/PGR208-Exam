@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.places_row.view.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.model.overviews.Places
+import no.kristiania.foreignlands.ui.utils.ListClickListener
 import java.util.*
 
-class OverviewAdapter(private var places: MutableList<Places>, var onClickListener: View.OnClickListener? = null) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
+class OverviewAdapter(private var places: MutableList<Places>, var onClickListener: ListClickListener) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
 
    private var searchList: MutableList<Places> = places
 
@@ -32,10 +33,16 @@ class OverviewAdapter(private var places: MutableList<Places>, var onClickListen
         fun bindViewHolder(item: Places){
             itemView.place_name.text = item.properties.name
             itemView.place_id.text = item.properties.id
-
             itemView.tag = item
 
-            itemView.setOnClickListener(onClickListener)
+            itemView.layout_row.setOnClickListener {
+                onClickListener.onNameClick(item.properties.id)
+            }
+
+            itemView.pin_button.setOnClickListener {
+                onClickListener.onIconClick(item.geometry.coordinates[0], item.geometry.coordinates[1])
+            }
+
         }
     }
 

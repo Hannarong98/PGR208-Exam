@@ -4,11 +4,12 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/util_view_border"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_row">
 
 
     <ImageButton
-        android:id="@+id/pin"
+        android:id="@+id/pin_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="?android:selectableItemBackground"
@@ -28,7 +29,7 @@
         android:maxLength="20"
         android:textSize="17sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/pin"
+        app:layout_constraintBottom_toBottomOf="@id/pin_button"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:text="TEST" />
 
