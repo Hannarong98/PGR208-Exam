@@ -1,4 +1,4 @@
-package no.kristiania.foreignlands.data.model.overviews
+package no.kristiania.foreignlands.data.db.model.overviews
 
 
 import android.annotation.SuppressLint
@@ -7,7 +7,6 @@ import android.os.Parcelable
 
 @SuppressLint("ParcelCreator")
 @Parcelize
-data class Places(
-    val geometry: Geometry,
-    val properties: Properties
+data class Geometry(
+    val coordinates: List<Double>
 ) : Parcelable

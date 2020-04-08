@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import no.kristiania.foreignlands.data.repository.OverviewRepository
-import no.kristiania.foreignlands.data.model.overviews.Places
+import no.kristiania.foreignlands.data.db.model.overviews.Places
 
 
 class OverviewViewModel(private val repository: OverviewRepository) : ViewModel() {
@@ -14,7 +14,7 @@ class OverviewViewModel(private val repository: OverviewRepository) : ViewModel(
 
     fun fetchPlaces(){
         viewModelScope.launch {
-            val places = repository.getPlaces()
+            val places = repository.getRemotePlaces()
             placesLiveData.postValue(places)
         }
     }

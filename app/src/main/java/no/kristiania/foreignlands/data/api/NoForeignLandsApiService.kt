@@ -1,13 +1,12 @@
 package no.kristiania.foreignlands.data.api
 
 
-import no.kristiania.foreignlands.data.model.overviews.OverviewResponse
-import no.kristiania.foreignlands.data.model.details.DetailsResponse
+import no.kristiania.foreignlands.data.db.model.overviews.OverviewResponse
+import no.kristiania.foreignlands.data.db.model.details.DetailsResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NoForeignLandsApiService {

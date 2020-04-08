@@ -18,7 +18,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textSize="24sp"
-            android:textStyle="bold"
+            android:textStyle="normal"
             android:height="60dp"
             android:gravity="center"
             android:scrollbars="vertical"
@@ -27,6 +27,18 @@
             app:layout_constraintLeft_toLeftOf="parent"
             tools:text="Test"
             />
+
+        <ImageButton
+            android:id="@+id/pin_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?android:selectableItemBackground"
+            android:contentDescription="@string/pin"
+            android:src="@drawable/ic_place_orange_24dp"
+            app:layout_constraintBottom_toTopOf="@id/detail_image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/detail_description"

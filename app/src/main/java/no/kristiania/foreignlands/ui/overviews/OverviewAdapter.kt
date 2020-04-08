@@ -8,7 +8,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.places_row.view.*
 import no.kristiania.foreignlands.R
-import no.kristiania.foreignlands.data.model.overviews.Places
+import no.kristiania.foreignlands.data.db.model.overviews.Places
 import no.kristiania.foreignlands.ui.utils.ListClickListener
 import java.util.*
 

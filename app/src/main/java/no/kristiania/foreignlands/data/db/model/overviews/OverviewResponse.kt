@@ -1,4 +1,4 @@
-package no.kristiania.foreignlands.data.model.overviews
+package no.kristiania.foreignlands.data.db.model.overviews
 
 
 import android.annotation.SuppressLint

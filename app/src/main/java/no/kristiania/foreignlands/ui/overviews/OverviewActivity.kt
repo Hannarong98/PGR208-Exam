@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_overview.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
+import no.kristiania.foreignlands.data.db.MyDatabase
 import no.kristiania.foreignlands.data.repository.OverviewRepository
 import no.kristiania.foreignlands.ui.details.DetailActivity
 import no.kristiania.foreignlands.ui.map.MapsActivity
