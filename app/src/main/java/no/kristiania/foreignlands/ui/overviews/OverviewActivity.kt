@@ -30,7 +30,7 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         val repository = OverviewRepository(api)
         val viewModel by viewModels<OverviewViewModel> { OverviewViewModelFactory(repository) }
         viewModel.fetchPlaces()
-        viewModel.placesLiveData.observe(this, Observer { places ->
+        viewModel.getPlaces().observe(this, Observer { places ->
             recycler_view_overviews.also {
                 it.layoutManager = LinearLayoutManager(this)
                 adapter = OverviewAdapter(places, this)

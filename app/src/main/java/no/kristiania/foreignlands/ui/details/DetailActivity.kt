@@ -28,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
         val repository = DetailsRepository(api)
         val viewModel by viewModels<DetailViewModel> { DetailViewModelFactory(repository) }
         viewModel.fetchDetails(placeID!!)
-        viewModel.placeDetailLiveData.observe(this, Observer { place ->
+        viewModel.getDetail().observe(this, Observer { place ->
 
             var placeComment = place.comments.replace("(<[^>]*>)|(&[a-z]+;)".toRegex(), "")
 

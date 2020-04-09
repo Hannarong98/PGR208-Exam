@@ -1,5 +1,6 @@
 package no.kristiania.foreignlands.ui.overviews
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +11,8 @@ import no.kristiania.foreignlands.data.db.model.overviews.Places
 
 class OverviewViewModel(private val repository: OverviewRepository) : ViewModel() {
 
-    val placesLiveData = MutableLiveData<MutableList<Places>>()
+    private val placesLiveData = MutableLiveData<MutableList<Places>>()
+    fun getPlaces(): LiveData<MutableList<Places>> = placesLiveData
 
     fun fetchPlaces(){
         viewModelScope.launch {
