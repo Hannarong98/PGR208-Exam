@@ -9,10 +9,7 @@ import androidx.room.Entity
 
 @SuppressLint("ParcelCreator")
 @Parcelize
-@Entity
 data class Places(
-    @Embedded(prefix = "geometry_")
     val geometry: Geometry,
-    @Embedded(prefix = "property_")
     val properties: Properties
 ) : Parcelable

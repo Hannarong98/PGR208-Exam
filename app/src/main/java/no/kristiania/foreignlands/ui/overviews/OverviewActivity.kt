@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_overview.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
-import no.kristiania.foreignlands.data.db.MyDatabase
+import no.kristiania.foreignlands.data.db.dao.PlacesDaoSQL
 import no.kristiania.foreignlands.data.repository.OverviewRepository
 import no.kristiania.foreignlands.ui.details.DetailActivity
 import no.kristiania.foreignlands.ui.map.MapsActivity
@@ -27,8 +27,9 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
         val api = NoForeignLandsApiService()
+        val daoSQL = PlacesDaoSQL(this)
         val repository = OverviewRepository(api)
-        val viewModel by viewModels<OverviewViewModel> { OverviewViewModelFactory(repository) }
+        val viewModel by viewModels<OverviewViewModel> { OverviewViewModelFactory(repository, daoSQL) }
         viewModel.fetchPlaces()
         viewModel.getPlaces().observe(this, Observer { places ->
             recycler_view_overviews.also {
@@ -36,6 +37,7 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
                 adapter = OverviewAdapter(places, this)
                 it.adapter = adapter
             }
+            adapter.onDetachedFromRecyclerView(recycler_view_overviews)
         }
         )
     }
@@ -60,8 +62,9 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
 
     }
 
+
     override fun onNameClick(id: String) {
-       val intent = Intent(this, DetailActivity::class.java)
+        val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("placeID", id)
         startActivity(intent)
     }
