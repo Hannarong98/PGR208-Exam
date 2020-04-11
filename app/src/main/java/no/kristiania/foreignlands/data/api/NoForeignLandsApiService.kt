@@ -11,10 +11,10 @@ import retrofit2.http.Query
 
 interface NoForeignLandsApiService {
     @GET("/home/api/v1/places")
-    suspend fun getOverviews(): Response<OverviewResponse>
+    suspend fun fetchRemote(): Response<OverviewResponse>
 
     @GET("home/api/v1/place")
-    suspend fun getDetail(@Query("id") id: String): Response<DetailsResponse>
+    suspend fun fetchRemoteDetail(@Query("id") id: String): Response<DetailsResponse>
 
     companion object {
         operator fun invoke() : NoForeignLandsApiService {

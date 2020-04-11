@@ -9,9 +9,12 @@ import no.kristiania.foreignlands.data.db.model.overviews.Places
 @Dao
 interface PlacesDao {
 
-    @Query("SELECT * FROM places")
-    suspend fun getLocalPlaces(): MutableList<Places>
+    @Query("SELECT * FROM PLACES")
+    suspend fun fetchLocal(): MutableList<Places>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(places: Places)
+    @Query("SELECT COUNT(name) from PLACES")
+    suspend fun getRowCount(): Int
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun upsert(places: MutableList<Places>)
 }

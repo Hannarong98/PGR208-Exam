@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_overview.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
-import no.kristiania.foreignlands.data.db.dao.PlacesDaoSQL
+import no.kristiania.foreignlands.data.db.MyDatabase
+import no.kristiania.foreignlands.data.db.dao.PlacesDao
 import no.kristiania.foreignlands.data.repository.OverviewRepository
 import no.kristiania.foreignlands.ui.details.DetailActivity
 import no.kristiania.foreignlands.ui.map.MapsActivity
@@ -27,9 +28,9 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
         val api = NoForeignLandsApiService()
-        val daoSQL = PlacesDaoSQL(this)
-        val repository = OverviewRepository(api)
-        val viewModel by viewModels<OverviewViewModel> { OverviewViewModelFactory(repository, daoSQL) }
+        val dao = MyDatabase.invoke(this).local()
+        val repository = OverviewRepository(api, dao)
+        val viewModel by viewModels<OverviewViewModel> { OverviewViewModelFactory(repository) }
         viewModel.fetchPlaces()
         viewModel.getPlaces().observe(this, Observer { places ->
             recycler_view_overviews.also {
