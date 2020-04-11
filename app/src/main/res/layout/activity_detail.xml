@@ -10,6 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/detail_image"
+            android:layout_width="wrap_content"
+            android:layout_height="310dp"
+            android:contentDescription="@string/place_image"
+            android:scaleType="fitCenter"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_placeholder" />
+
 
         <TextView
             android:id="@+id/detail_name"
@@ -17,15 +28,17 @@
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="normal"
+            android:layout_margin="5dp"
+            android:padding="13dp"
             android:height="60dp"
-            android:gravity="center"
+            android:gravity="start"
+            android:textColor="@color/colorBlack"
             android:scrollbars="vertical"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/detail_image"
+            app:layout_constraintTop_toBottomOf="@id/detail_image"
             app:layout_constraintLeft_toLeftOf="parent"
-            tools:text="Test"
+            tools:text="Sidi Bou Said Fuel"
             />
 
         <ImageButton
@@ -36,34 +49,23 @@
             android:contentDescription="@string/pin"
             android:layout_margin="4dp"
             android:src="@drawable/ic_place_orange_24dp"
-            app:layout_constraintBottom_toTopOf="@id/detail_image"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/detail_name"
+            app:layout_constraintBottom_toBottomOf="@id/detail_name"/>
 
 
         <TextView
             android:id="@+id/detail_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start"
-
-            android:padding="35dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity= "start"
+            android:textColor="@color/colorBlack"
+            android:layout_margin="5dp"
+            android:padding="25dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_image"
-            tools:text="@string/description_placeholder" />
-
-        <ImageView
-            android:id="@+id/detail_image"
-            android:layout_width="wrap_content"
-            android:layout_height="290dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/place_image"
-            app:layout_constraintRight_toLeftOf="parent"
-            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_name"
-            tools:src="@drawable/img_placeholder"/>
+            tools:text="@string/description_placeholder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

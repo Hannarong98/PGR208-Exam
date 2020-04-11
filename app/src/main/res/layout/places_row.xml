@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:maxLength="32"
-            android:textColor="#000"
+            android:textColor="@color/colorBlack"
             android:textSize="17sp"
             tools:text="Høyskolen Kristiania" />
 

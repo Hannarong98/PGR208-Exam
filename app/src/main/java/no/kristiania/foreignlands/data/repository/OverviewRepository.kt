@@ -20,7 +20,6 @@ class OverviewRepository(private val api: NoForeignLandsApiService, private val 
             dao.upsert(response?.features!!.toMutableList())
             response.features
         }
-
     }
 
 }

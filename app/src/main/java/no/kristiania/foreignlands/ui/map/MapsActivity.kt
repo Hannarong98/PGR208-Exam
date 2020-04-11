@@ -41,6 +41,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
         val place = lat?.let { lon?.let { it1 -> LatLng(it1, it) } }
         mMap.addMarker(place?.let { MarkerOptions().position(it) })
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(place))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place, 10f), 3000, null)
     }
 }

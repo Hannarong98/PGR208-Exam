@@ -4,12 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.Menu
-import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_overview.*
 import no.kristiania.foreignlands.R
