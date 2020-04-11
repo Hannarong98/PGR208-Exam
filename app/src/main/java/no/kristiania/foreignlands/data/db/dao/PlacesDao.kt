@@ -1,14 +1,12 @@
 package no.kristiania.foreignlands.data.db.dao
 
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import no.kristiania.foreignlands.data.db.model.overviews.Places
 @Dao
 interface PlacesDao {
 
+    @Transaction
     @Query("SELECT * FROM PLACES")
     suspend fun fetchLocal(): MutableList<Places>
 

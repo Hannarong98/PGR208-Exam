@@ -12,9 +12,9 @@ import no.kristiania.foreignlands.data.db.model.overviews.Places
 import no.kristiania.foreignlands.ui.utils.ListClickListener
 import java.util.*
 
-class OverviewAdapter(private var places: MutableList<Places>, var onClickListener: ListClickListener) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
+class OverviewAdapter(private var places: List<Places>, var onClickListener: ListClickListener) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
 
-   private var searchList: MutableList<Places> = places
+   private var searchList: List<Places> = places
 
 
 
@@ -70,7 +70,7 @@ class OverviewAdapter(private var places: MutableList<Places>, var onClickListen
             }
 
             override fun publishResults(c: CharSequence, result: FilterResults) {
-                val newList: MutableList<Places>? = result.values as MutableList<Places>
+                val newList: List<Places>? = result.values as List<Places>
                 if(!newList.isNullOrEmpty()) {
                     places = newList
                     notifyDataSetChanged()

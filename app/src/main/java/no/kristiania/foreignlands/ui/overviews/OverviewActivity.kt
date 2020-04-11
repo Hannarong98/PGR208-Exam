@@ -27,6 +27,7 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
+
         val api = NoForeignLandsApiService()
         val dao = MyDatabase.invoke(this).local()
         val repository = OverviewRepository(api, dao)

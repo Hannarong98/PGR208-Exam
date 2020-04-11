@@ -14,19 +14,11 @@ class OverviewViewModel(private val repository: OverviewRepository) : ViewModel(
 
 
 
-    private val placesLiveData = MutableLiveData<MutableList<Places>>()
-    fun getPlaces(): LiveData<MutableList<Places>> = placesLiveData
+    private val placesLiveData = MutableLiveData<List<Places>>()
+    fun getPlaces(): LiveData<List<Places>> = placesLiveData
 
     fun fetchPlaces(){
         viewModelScope.launch {
-            /*val places: MutableList<Places> = if(dao.fetchAll().isNotEmpty()){
-                e("DB SIZE IF BLOCK", dao.fetchAll().size.toString())
-                dao.fetchAll()
-            } else {
-                e("DB SIZE ELSE BLOCK", dao.fetchAll().size.toString())
-                dao.addList(repository.getPlaces())
-                repository.getPlaces()!!
-            }*/
             val places = repository.getPlaces()
             placesLiveData.postValue(places)
         }

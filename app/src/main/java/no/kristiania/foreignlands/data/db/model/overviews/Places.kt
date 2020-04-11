@@ -12,7 +12,7 @@ import no.kristiania.foreignlands.data.db.utils.ListTypeConverter
 @Entity
 data class Places(
     @PrimaryKey(autoGenerate = true)
-    @Embedded
+    @ColumnInfo(name = "table_id")
     val id: Long,
     @Embedded
     val geometry: Geometry,
