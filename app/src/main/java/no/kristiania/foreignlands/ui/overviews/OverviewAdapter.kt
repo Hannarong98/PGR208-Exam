@@ -1,5 +1,6 @@
 package no.kristiania.foreignlands.ui.overviews
 
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +13,10 @@ import no.kristiania.foreignlands.data.db.model.overviews.Places
 import no.kristiania.foreignlands.ui.utils.ListClickListener
 import java.util.*
 
-class OverviewAdapter(private var places: List<Places>, var onClickListener: ListClickListener) : RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
+class OverviewAdapter(private var places: List<Places>, var onClickListener: ListClickListener) :
+    RecyclerView.Adapter<OverviewAdapter.ViewHolder>(), Filterable {
 
-   private var searchList: List<Places> = places
-
+    private var searchList: List<Places> = places
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,30 +30,33 @@ class OverviewAdapter(private var places: List<Places>, var onClickListener: Lis
         holder.bindViewHolder(places[position])
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bindViewHolder(item: Places){
-            itemView.place_name.text = item.properties.name
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bindViewHolder(item: Places) {
+
+            itemView.overview_place_name.text = item.properties.name
             itemView.place_id.text = item.properties.id
-            itemView.tag = item
 
             itemView.layout_row.setOnClickListener {
                 onClickListener.onNameClick(item.properties.id)
             }
 
-            itemView.pin_button.setOnClickListener {
-                onClickListener.onIconClick(item.geometry.coordinates[0], item.geometry.coordinates[1])
+            itemView.detail_pin_button.setOnClickListener {
+                onClickListener.onIconClick(
+                    item.geometry.coordinates[0],
+                    item.geometry.coordinates[1]
+                )
             }
 
         }
     }
 
     override fun getFilter(): Filter {
-        return object : Filter(){
+        return object : Filter() {
             override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val listTemp = searchList
                 val filterResults = FilterResults()
                 val resultList: MutableList<Places> = ArrayList()
-                if(charSequence.isEmpty()) {
+                if (charSequence.isEmpty()) {
                     resultList.addAll(listTemp)
                 } else {
 
@@ -71,7 +75,7 @@ class OverviewAdapter(private var places: List<Places>, var onClickListener: Lis
 
             override fun publishResults(c: CharSequence, result: FilterResults) {
                 val newList: List<Places>? = result.values as List<Places>
-                if(!newList.isNullOrEmpty()) {
+                if (!newList.isNullOrEmpty()) {
                     places = newList
                     notifyDataSetChanged()
                 }

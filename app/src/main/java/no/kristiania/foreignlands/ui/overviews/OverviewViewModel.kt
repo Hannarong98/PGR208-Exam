@@ -12,12 +12,15 @@ import no.kristiania.foreignlands.data.db.model.overviews.Places
 
 class OverviewViewModel(private val repository: OverviewRepository) : ViewModel() {
 
-
+    //Should not be called when config changes happens
+    init {
+        e("VM", "init")
+    }
 
     private val placesLiveData = MutableLiveData<List<Places>>()
     fun getPlaces(): LiveData<List<Places>> = placesLiveData
-
     fun fetchPlaces(){
+        e("VM", "fetchPlaces")
         viewModelScope.launch {
             val places = repository.getPlaces()
             placesLiveData.postValue(places)

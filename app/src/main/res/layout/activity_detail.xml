@@ -29,11 +29,12 @@
             />
 
         <ImageButton
-            android:id="@+id/pin_button"
+            android:id="@+id/detail_pin_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="?android:selectableItemBackground"
             android:contentDescription="@string/pin"
+            android:layout_margin="4dp"
             android:src="@drawable/ic_place_orange_24dp"
             app:layout_constraintBottom_toTopOf="@id/detail_image"
             app:layout_constraintRight_toRightOf="parent"
@@ -44,10 +45,12 @@
             android:id="@+id/detail_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="20dp"
-            app:layout_constraintLeft_toRightOf="parent"
+            android:gravity="start"
+
+            android:padding="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_image"
             tools:text="@string/description_placeholder" />
 

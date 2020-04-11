@@ -40,13 +40,10 @@ dependencies {
     def core_ktx_version = "1.2.0"
     def coroutines_version = "1.3.5"
     def glide_version = "4.11.0"
-    def groupie_version = "2.7.0"
     def gson_version = "2.8.6"
-    def kodein_version = "6.5.0"
     def lifecycle_version = "2.2.0"
     def location_google_version = "17.0.0"
     def nav_version = "2.3.0-alpha04"
-    def preference_version = "1.1.0"
     def retrofit_version = "2.7.1"
     def retrofit_coroutines_adapt_version = "0.9.2"
     def room_version = "2.2.5"
@@ -74,13 +71,6 @@ dependencies {
     // GSON
     implementation "com.google.code.gson:gson:$gson_version"
 
-    // GROUPIE
-    implementation "com.xwray:groupie:$groupie_version"
-    implementation "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
-
-    // KODEIN
-    implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
-    implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_version"
 
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
@@ -97,8 +87,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
-    //PREFERENCE
-    implementation "androidx.preference:preference-ktx:$preference_version"
 
     //ROOM
     implementation "androidx.room:room-ktx:$room_version"

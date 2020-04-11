@@ -2,7 +2,6 @@ package no.kristiania.foreignlands.ui.details
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log.e
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -20,7 +19,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-
 
         placeID = intent.getStringExtra("placeID")
 
@@ -40,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
             detail_description.text = placeComment
             detail_name.text = place.name
 
-            pin_button.setOnClickListener {
+            detail_pin_button.setOnClickListener {
                 val intent = Intent(this, MapsActivity::class.java)
                 intent.putExtra("lat", place.lat)
                 intent.putExtra("long", place.lon)
