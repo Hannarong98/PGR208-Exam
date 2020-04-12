@@ -13,8 +13,9 @@ import no.kristiania.foreignlands.data.db.utils.ListTypeConverter
 @TypeConverters(ListTypeConverter::class)
 abstract class MyDatabase : RoomDatabase() {
 
-    abstract fun local(): PlacesDao
+    abstract fun placesDao(): PlacesDao
 
+    //Get singleton database
     companion object {
 
         @Volatile
