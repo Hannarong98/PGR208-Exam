@@ -22,7 +22,7 @@ import no.kristiania.foreignlands.ui.utils.ListClickListener
 class OverviewActivity : AppCompatActivity(), ListClickListener {
 
     private lateinit var adapter: OverviewAdapter
-    private var lastClicked = 0L;
+    private var lastClicked = 0L
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,9 +47,19 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         })
     }
 
+
+    //Should hide search function til oncreated is finnished
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        val item = menu?.findItem(R.id.action_search)
+        item?.isVisible = false
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         val item = menu?.findItem(R.id.action_search)
+        item?.isVisible = true
         val searchView = item?.actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

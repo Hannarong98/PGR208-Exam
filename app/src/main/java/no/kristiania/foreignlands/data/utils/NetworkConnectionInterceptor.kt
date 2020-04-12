@@ -7,6 +7,9 @@ import android.os.Build
 import okhttp3.Interceptor
 import okhttp3.Response
 
+// isConnected function is taken from https://stackoverflow.com/questions/57277759/getactivenetworkinfo-is-deprecated-in-api-29
+
+
 class NetworkConnectionInterceptor(context: Context) : Interceptor {
 
     private val applicationContext = context.applicationContext
@@ -20,7 +23,6 @@ class NetworkConnectionInterceptor(context: Context) : Interceptor {
 
     private fun isConnected(): Boolean {
         val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val nw = connectivityManager.activeNetwork ?: return false
             val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
             return when {
@@ -28,9 +30,5 @@ class NetworkConnectionInterceptor(context: Context) : Interceptor {
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                 else -> false
             }
-        } else {
-            val nwInfo = connectivityManager.activeNetworkInfo ?: return false
-            return nwInfo.isConnected
-        }
     }
 }
