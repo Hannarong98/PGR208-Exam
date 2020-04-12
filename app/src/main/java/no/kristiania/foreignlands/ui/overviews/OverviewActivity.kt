@@ -35,6 +35,7 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         val api = NoForeignLandsApiService(networkConnectionInterceptor)
         val dao = MyDatabase.invoke(this).placesDao()
         val repository = OverviewRepository(api, dao)
+
         val viewModel by viewModels<OverviewViewModel> { OverviewViewModelFactory(repository) }
         viewModel.fetchPlaces()
         viewModel.getPlaces().observe(this, Observer { places ->
