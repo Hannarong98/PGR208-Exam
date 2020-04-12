@@ -14,6 +14,7 @@ import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.db.MyDatabase
 import no.kristiania.foreignlands.data.repository.OverviewRepository
+import no.kristiania.foreignlands.data.utils.NetworkConnectionInterceptor
 import no.kristiania.foreignlands.ui.details.DetailActivity
 import no.kristiania.foreignlands.ui.map.MapsActivity
 import no.kristiania.foreignlands.ui.utils.ListClickListener
@@ -30,7 +31,8 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         setContentView(R.layout.activity_overview)
 
 
-        val api = NoForeignLandsApiService()
+        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+        val api = NoForeignLandsApiService(networkConnectionInterceptor)
         val dao = MyDatabase.invoke(this).placesDao()
         val repository = OverviewRepository(api, dao)
         val viewModel by viewModels<OverviewViewModel> { OverviewViewModelFactory(repository) }

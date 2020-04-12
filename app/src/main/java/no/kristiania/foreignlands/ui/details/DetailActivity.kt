@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import no.kristiania.foreignlands.R
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.repository.DetailsRepository
+import no.kristiania.foreignlands.data.utils.NetworkConnectionInterceptor
 import no.kristiania.foreignlands.ui.map.MapsActivity
 
 class DetailActivity : AppCompatActivity() {
@@ -21,8 +22,8 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         placeID = intent.getStringExtra("placeID")
-
-        val api = NoForeignLandsApiService()
+        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+        val api = NoForeignLandsApiService(networkConnectionInterceptor)
         val repository = DetailsRepository(api)
         val viewModel by viewModels<DetailViewModel> { DetailViewModelFactory(repository) }
         viewModel.fetchDetails(placeID!!)

@@ -3,6 +3,7 @@ package no.kristiania.foreignlands.data.api
 
 import no.kristiania.foreignlands.data.db.model.overviews.OverviewResponse
 import no.kristiania.foreignlands.data.db.model.details.DetailsResponse
+import no.kristiania.foreignlands.data.utils.NetworkConnectionInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -18,8 +19,16 @@ interface NoForeignLandsApiService {
     suspend fun fetchRemoteDetail(@Query("id") id: String): Response<DetailsResponse>
 
     companion object {
-        operator fun invoke(): NoForeignLandsApiService {
+        operator fun invoke(
+            networkInterceptor: NetworkConnectionInterceptor
+        ): NoForeignLandsApiService {
+
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkInterceptor)
+                .build()
+
             return Retrofit.Builder()
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("https://www.noforeignland.com")
                 .build()
