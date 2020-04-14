@@ -1,6 +1,7 @@
 package no.kristiania.foreignlands.ui.overviews
 
-import android.util.Log.e
+
+import android.util.Log.i
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +16,7 @@ class OverviewViewModel(private val repository: OverviewRepository) : ViewModel(
     private val placesLiveData = MutableLiveData<List<Places>>()
     fun getPlaces(): LiveData<List<Places>> = placesLiveData
     fun fetchPlaces(){
-        e("OVM", "fetchPlaces")
+        i("OVM", "fetching places from repository")
         viewModelScope.launch {
             val places = repository.getPlaces()
             placesLiveData.postValue(places)

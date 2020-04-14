@@ -3,6 +3,7 @@ package no.kristiania.foreignlands.ui.overviews
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -40,28 +41,22 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         viewModel.fetchPlaces()
         viewModel.getPlaces().observe(this, Observer { places ->
             recyclerview_overviews.also {
-                it.layoutManager = LinearLayoutManager(this)
                 adapter = OverviewAdapter(places, this)
                 it.adapter = adapter
+                //Forces menu to be redrawn
+                invalidateOptionsMenu()
+                it.layoutManager = LinearLayoutManager(this)
             }
         })
-    }
-
-
-    //Should hide search function til oncreated is finnished
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        val item = menu?.findItem(R.id.action_search)
-        item?.isVisible = false
-        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         val item = menu?.findItem(R.id.action_search)
-        item?.isVisible = true
         val searchView = item?.actionView as SearchView
-
+        //Adapter has to be initialized inside of observer before search can happen
+        //Otherwise its going to crash the application
+        if (this@OverviewActivity::adapter.isInitialized)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 adapter.filter.filter(query)

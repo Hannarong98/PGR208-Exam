@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -34,10 +35,10 @@ class DetailActivity : AppCompatActivity() {
             if (placeComment.isEmpty()) {
                 placeComment = getString(R.string.place_no_description)
                 detail_description.text = placeComment
+            } else {
+                detail_description.text = HtmlCompat.fromHtml(place.comments, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                detail_name.text = place.name
             }
-
-            detail_description.text = placeComment
-            detail_name.text = place.name
 
             detail_pin_button.setOnClickListener {
                 val intent = Intent(this, MapsActivity::class.java)
