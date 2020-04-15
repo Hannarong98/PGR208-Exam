@@ -26,9 +26,9 @@ class DetailActivity : AppCompatActivity() {
         val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
         val api = NoForeignLandsApiService(networkConnectionInterceptor)
         val repository = DetailsRepository(api)
-        val viewModel by viewModels<DetailViewModel> { DetailViewModelFactory(repository) }
-        viewModel.fetchDetails(placeID!!)
-        viewModel.getDetail().observe(this, Observer { place ->
+
+        val viewModel by viewModels<DetailViewModel> { DetailViewModelFactory(repository, placeID!!) }
+        viewModel.detail.observe(this, Observer { place ->
 
             var placeComment = place.comments.replace("(<[^>]*>)|(&[a-z]+;)".toRegex(), "")
 
@@ -38,6 +38,7 @@ class DetailActivity : AppCompatActivity() {
             } else {
                 detail_description.text = HtmlCompat.fromHtml(place.comments, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
+
             detail_name.text = place.name
 
             detail_pin_button.setOnClickListener {

@@ -1,5 +1,6 @@
 package no.kristiania.foreignlands.ui.details
 
+import android.util.Log.i
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,14 +10,18 @@ import no.kristiania.foreignlands.data.db.model.details.PlaceDetail
 import no.kristiania.foreignlands.data.repository.DetailsRepository
 
 
-class DetailViewModel(private val repository: DetailsRepository) : ViewModel() {
+class DetailViewModel(private val repository: DetailsRepository,  private val placeId: String) : ViewModel() {
 
     private val placeDetailLiveData = MutableLiveData<PlaceDetail>()
-    fun getDetail(): LiveData<PlaceDetail> = placeDetailLiveData
-    fun fetchDetails(id: String) {
+
+    init {
+        i("DVM", "fetching detail from repository")
         viewModelScope.launch {
-            val detail = repository.getRemotePlaceDetails(id)
+            val detail = repository.getRemotePlaceDetails(placeId)
             placeDetailLiveData.postValue(detail)
         }
     }
+
+    val detail: LiveData<PlaceDetail>
+    get() = placeDetailLiveData
 }
