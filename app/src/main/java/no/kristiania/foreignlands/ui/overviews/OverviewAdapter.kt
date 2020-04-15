@@ -42,7 +42,8 @@ class OverviewAdapter(private var places: List<Places>, var onClickListener: Lis
             itemView.detail_pin_button.setOnClickListener {
                 onClickListener.onIconClick(
                     item.geometry.coordinates[0],
-                    item.geometry.coordinates[1]
+                    item.geometry.coordinates[1],
+                    item.properties.name
                 )
             }
 

@@ -76,12 +76,14 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         if (delay()) return
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("placeID", id)
+
         startActivity(intent)
     }
 
-    override fun onIconClick(lat: Double, lon: Double) {
+    override fun onIconClick(lat: Double, lon: Double, placeName: String) {
         if (delay()) return
         val intent = Intent(this, MapsActivity::class.java)
+        intent.putExtra("placeName", placeName)
         intent.putExtra("lat", lat)
         intent.putExtra("long", lon)
         startActivity(intent)

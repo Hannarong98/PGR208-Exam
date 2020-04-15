@@ -14,14 +14,16 @@ import no.kristiania.foreignlands.R
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private var lat : Double? = null
+    private var lat: Double? = null
     private var lon: Double? = null
+    private var placeName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         lon = intent.getDoubleExtra("long", -34.0)
         lat = intent.getDoubleExtra("lat", -34.0)
+        placeName = intent.getStringExtra("placeName")
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -37,10 +39,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val place = lat?.let { lon?.let { it1 -> LatLng(it1, it) } }
-        mMap.addMarker(place?.let { MarkerOptions().position(it) })
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place, 10f), 3000, null)
+        val placeCord = lat?.let { lon?.let { it1 -> LatLng(it1, it) } }
+        mMap.addMarker(placeCord?.let {
+            MarkerOptions()
+                .position(it)
+                .title(placeName)
+                .snippet("${placeCord.latitude}, ${placeCord.latitude}")
+        }).showInfoWindow()
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeCord, 14f), 3000, null)
     }
+
+
 }

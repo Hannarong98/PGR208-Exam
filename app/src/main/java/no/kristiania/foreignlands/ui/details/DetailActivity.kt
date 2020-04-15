@@ -51,6 +51,7 @@ class DetailActivity : AppCompatActivity() {
                 val intent = Intent(this, MapsActivity::class.java)
                 intent.putExtra("lat", place.lat)
                 intent.putExtra("long", place.lon)
+                intent.putExtra("placeName", place.name)
                 startActivity(intent)
             }
 
