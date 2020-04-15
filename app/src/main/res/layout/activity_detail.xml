@@ -24,22 +24,20 @@
 
         <TextView
             android:id="@+id/detail_name"
-            android:layout_width="290dp"
-            android:layout_height="80dp"
+            android:layout_width="341dp"
+            android:layout_height="88dp"
+            android:layout_margin="5dp"
+            android:gravity="start"
+            android:padding="13dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/colorBlack"
             android:textSize="22sp"
             android:textStyle="normal"
-            android:layout_margin="5dp"
-            android:padding="13dp"
-            android:height="60dp"
-            android:gravity="start"
-            android:textColor="@color/colorBlack"
-            android:scrollbars="vertical"
-            app:layout_constraintTop_toBottomOf="@id/detail_image"
             app:layout_constraintLeft_toLeftOf="parent"
-            tools:text="Sidi Bou Said Fuel"
-            />
+            app:layout_constraintTop_toBottomOf="@id/detail_image"
+            tools:text="Island Water World, St. Georges" />
 
         <ImageButton
             android:id="@+id/detail_pin_button"
