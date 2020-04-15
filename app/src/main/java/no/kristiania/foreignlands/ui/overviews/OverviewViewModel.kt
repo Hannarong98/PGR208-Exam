@@ -13,20 +13,20 @@ import no.kristiania.foreignlands.data.db.model.overviews.Places
 
 class OverviewViewModel(private val repository: OverviewRepository) : ViewModel() {
 
-    // Should not expose mutable data
+    // Encapsulated because its mutable
     private val placesLiveData = MutableLiveData<List<Places>>()
 
     // Should only be called once
     // Even if configuration changes happens
     init {
-        i("OVM", "fetching places from repository")
+        i("Overview VM", "fetching places from repository")
         viewModelScope.launch {
             val places = repository.getPlaces()
             placesLiveData.postValue(places)
         }
     }
 
-    val places: LiveData<List<Places>>
+    val placesList: LiveData<List<Places>>
     get() = placesLiveData
 
 }

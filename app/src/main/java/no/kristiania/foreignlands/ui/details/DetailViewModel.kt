@@ -12,10 +12,11 @@ import no.kristiania.foreignlands.data.repository.DetailsRepository
 
 class DetailViewModel(private val repository: DetailsRepository,  private val placeId: String) : ViewModel() {
 
+    // Encapsulated because its mutable
     private val placeDetailLiveData = MutableLiveData<PlaceDetail>()
 
     init {
-        i("DVM", "fetching detail from repository")
+        i("Detail VM", "fetching place detail from repository")
         viewModelScope.launch {
             val detail = repository.getRemotePlaceDetails(placeId)
             placeDetailLiveData.postValue(detail)
