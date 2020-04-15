@@ -27,7 +27,12 @@ class DetailActivity : AppCompatActivity() {
         val api = NoForeignLandsApiService(networkConnectionInterceptor)
         val repository = DetailsRepository(api)
 
-        val viewModel by viewModels<DetailViewModel> { DetailViewModelFactory(repository, placeID!!) }
+        val viewModel by viewModels<DetailViewModel> {
+            DetailViewModelFactory(
+                repository,
+                placeID!!
+            )
+        }
         viewModel.detail.observe(this, Observer { place ->
 
             var placeComment = place.comments.replace("(<[^>]*>)|(&[a-z]+;)".toRegex(), "")
@@ -36,7 +41,8 @@ class DetailActivity : AppCompatActivity() {
                 placeComment = getString(R.string.place_no_description)
                 detail_description.text = placeComment
             } else {
-                detail_description.text = HtmlCompat.fromHtml(place.comments, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                detail_description.text =
+                    HtmlCompat.fromHtml(place.comments, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
 
             detail_name.text = place.name
@@ -48,16 +54,10 @@ class DetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            if (place.banner.isNotBlank()) {
-                Glide.with(this)
-                    .load(place.banner)
-                    .into(detail_image)
-            } else {
-                Glide.with(this)
-                    .load(R.drawable.img_placeholder)
-                    .into(detail_image)
-            }
-
+            Glide.with(this)
+                .load(place.banner)
+                .placeholder(R.drawable.img_placeholder)
+                .into(detail_image)
         })
 
     }
