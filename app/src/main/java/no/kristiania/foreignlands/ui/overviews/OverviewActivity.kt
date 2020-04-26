@@ -1,18 +1,13 @@
 package no.kristiania.foreignlands.ui.overviews
 
-import android.Manifest.permission
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.Menu
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_overview.*
@@ -29,7 +24,6 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
 
     private lateinit var adapter: OverviewAdapter
     private var lastClicked = 0L
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -55,56 +49,13 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         })
     }
 
-
-    private fun hasPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun requestForPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(permission.ACCESS_COARSE_LOCATION),
-                100
-            )
-        } else {
-            Toast.makeText(this, "Permission has already been granted", Toast.LENGTH_LONG).show()
-        }
-
-    }
-
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            100 -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show()
-                }
-                return
-            }
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         val item = menu?.findItem(R.id.action_search)
         val searchView = item?.actionView as SearchView
         item.isEnabled = false
         //Adapter has to be initialized inside of observer before search can happen
-        //Otherwise its going to crash the application
+        //Otherwise its going to crash the application thus, isEnabled is set to false
         if (this@OverviewActivity::adapter.isInitialized)
             item.isEnabled = true
 
@@ -135,16 +86,12 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
     override fun onIconClick(lat: Double, lon: Double, placeName: String) {
         if (delay()) return
         val intent = Intent(this, MapsActivity::class.java)
-        intent.putExtra("placeName", placeName)
-        intent.putExtra("lat", lat)
-        intent.putExtra("long", lon)
-        if (hasPermission()) {
-            startActivity(intent)
-        } else {
-            requestForPermission()
-            if (hasPermission())
-                startActivity(intent)
+        intent.apply {
+            putExtra("placeName", placeName)
+            putExtra("lat", lat)
+            putExtra("long", lon)
         }
+        startActivity(intent)
     }
 
     private fun delay(): Boolean {

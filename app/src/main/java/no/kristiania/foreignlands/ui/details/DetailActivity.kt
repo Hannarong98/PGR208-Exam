@@ -1,14 +1,9 @@
 package no.kristiania.foreignlands.ui.details
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
@@ -57,15 +52,7 @@ class DetailActivity : AppCompatActivity() {
                 intent.putExtra("lat", place.lat)
                 intent.putExtra("long", place.lon)
                 intent.putExtra("placeName", place.name)
-
-                if (hasPermission()) {
-                    startActivity(intent)
-                } else {
-                    requestForPermission()
-                    if (hasPermission())
-                        startActivity(intent)
-                }
-
+                startActivity(intent)
             }
 
             Glide.with(this)
@@ -74,48 +61,6 @@ class DetailActivity : AppCompatActivity() {
                 .into(detail_image)
         })
 
-    }
-
-    private fun hasPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun requestForPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                100
-            )
-        } else {
-            Toast.makeText(this, "Permission has already been granted", Toast.LENGTH_LONG).show()
-        }
-
-    }
-
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            100 -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show()
-                }
-                return
-            }
-        }
     }
 
 
