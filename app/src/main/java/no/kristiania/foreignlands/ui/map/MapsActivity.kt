@@ -14,16 +14,11 @@ import no.kristiania.foreignlands.R
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private var lat: Double? = null
-    private var lon: Double? = null
-    private var placeName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-        lon = intent.getDoubleExtra("long", -34.0)
-        lat = intent.getDoubleExtra("lat", -34.0)
-        placeName = intent.getStringExtra("placeName")
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -42,8 +37,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val placeCord = lat?.let { lon?.let { it1 -> LatLng(it1, it) } }
-        mMap.addMarker(placeCord?.let {
+
+        val lon = intent.getDoubleExtra("long", -34.0)
+        val lat = intent.getDoubleExtra("lat", -34.0)
+        val placeName = intent.getStringExtra("placeName")
+        val placeCord = LatLng(lon, lat)
+        mMap.addMarker(placeCord.let {
             MarkerOptions()
                 .position(it)
                 .title(placeName)
