@@ -16,7 +16,6 @@
             android:layout_height="310dp"
             android:contentDescription="@string/place_image"
             android:scaleType="fitCenter"
-            android:layout_marginTop="10dp"
             app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +24,7 @@
 
         <TextView
             android:id="@+id/detail_name"
-            android:layout_width="341dp"
+            android:layout_width="310dp"
             android:layout_height="88dp"
             android:layout_margin="5dp"
             android:gravity="start"
@@ -50,6 +49,7 @@
             android:src="@drawable/ic_place_orange_24dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/detail_name"
+            app:layout_constraintBottom_toBottomOf="@id/detail_name"
             />
 
 

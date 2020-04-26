@@ -17,5 +17,7 @@ data class Places(
     @Embedded
     val geometry: Geometry,
     @Embedded
-    val properties: Properties
+    val properties: Properties,
+    @ColumnInfo(defaultValue = "(strftime('%s','now'))")
+    val timestampSeconds: String
 ) : Parcelable

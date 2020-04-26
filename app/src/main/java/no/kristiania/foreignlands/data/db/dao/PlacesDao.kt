@@ -13,6 +13,12 @@ interface PlacesDao {
     @Query("SELECT COUNT(name) from PLACES")
     suspend fun getRowCount(): Int
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(places: MutableList<Places>)
+
+    @Query("UPDATE places set timestampSeconds= :newTimeStamp")
+    suspend fun updateModifiedTimeStamp(newTimeStamp: String)
+
+    @Query("SELECT timestampSeconds from PLACES LIMIT 1")
+    suspend fun getModifiedAtTimeStamp(): String
 }

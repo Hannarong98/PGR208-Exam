@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -31,6 +32,7 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
 
+        progress_indicator.visibility = View.VISIBLE
 
         val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
         val api = NoForeignLandsApiService(networkConnectionInterceptor)
@@ -42,9 +44,9 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
             recyclerview_overviews.also {
                 adapter = OverviewAdapter(places, this)
                 it.adapter = adapter
-                //Forces menu to be redrawn
-                invalidateOptionsMenu()
                 it.layoutManager = LinearLayoutManager(this)
+                invalidateOptionsMenu()
+                progress_indicator.visibility = View.INVISIBLE
             }
         })
     }
@@ -53,9 +55,12 @@ class OverviewActivity : AppCompatActivity(), ListClickListener {
         menuInflater.inflate(R.menu.menu_main, menu)
         val item = menu?.findItem(R.id.action_search)
         val searchView = item?.actionView as SearchView
+        item.isEnabled = false
         //Adapter has to be initialized inside of observer before search can happen
         //Otherwise its going to crash the application
         if (this@OverviewActivity::adapter.isInitialized)
+            item.isEnabled = true
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 adapter.filter.filter(query)

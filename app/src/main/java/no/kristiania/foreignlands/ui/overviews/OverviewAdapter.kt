@@ -33,7 +33,6 @@ class OverviewAdapter(private var places: List<Places>, var onClickListener: Lis
         fun bindViewHolder(item: Places) {
 
             itemView.overview_place_name.text = item.properties.name
-            itemView.place_id.text = item.properties.id
 
             itemView.layout_row.setOnClickListener {
                 onClickListener.onNameClick(item.properties.id)
