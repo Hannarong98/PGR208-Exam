@@ -18,7 +18,6 @@
         android:indeterminate="true"
         android:indeterminateTintMode="src_in"
         android:indeterminateTint="@color/colorPrimary"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         />
 
     <androidx.recyclerview.widget.RecyclerView

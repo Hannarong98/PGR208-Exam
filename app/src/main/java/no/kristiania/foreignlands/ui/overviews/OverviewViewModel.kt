@@ -19,7 +19,7 @@ class OverviewViewModel(private val repository: OverviewRepository) : ViewModel(
     // Should only be called once
     // Even if configuration changes happens
     init {
-        i("Overview VM", "fetching places from repository")
+        i("Overview VM", "Requesting data from repository")
         viewModelScope.launch {
             val places = repository.getPlaces()
             placesLiveData.postValue(places)
