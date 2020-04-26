@@ -9,7 +9,7 @@ import no.kristiania.foreignlands.data.db.dao.PlacesDao
 import no.kristiania.foreignlands.data.db.model.overviews.Places
 import no.kristiania.foreignlands.data.db.utils.ListTypeConverter
 
-@Database(entities = [Places::class], version = 1)
+@Database(entities = [Places::class], version = 2)
 @TypeConverters(ListTypeConverter::class)
 abstract class MyDatabase : RoomDatabase() {
 
@@ -33,7 +33,7 @@ abstract class MyDatabase : RoomDatabase() {
                 ctx.applicationContext,
                 MyDatabase::class.java,
                 "MyDb.db"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
     }
 
 }
