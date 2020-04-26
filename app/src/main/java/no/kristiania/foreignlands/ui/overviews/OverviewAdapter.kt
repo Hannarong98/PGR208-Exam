@@ -73,7 +73,10 @@ class OverviewAdapter(private var places: List<Places>, var onClickListener: Lis
             }
 
             override fun publishResults(c: CharSequence, result: FilterResults) {
+
+                @Suppress("UNCHECKED_CAST")
                 val newList: List<Places>? = result.values as List<Places>
+
                 if (!newList.isNullOrEmpty()) {
                     places = newList
                     notifyDataSetChanged()
