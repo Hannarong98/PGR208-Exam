@@ -6,9 +6,9 @@ import no.kristiania.foreignlands.data.repository.DetailsRepository
 
 @Suppress("UNCHECKED_CAST")
 class DetailViewModelFactory(
-    private val repository : DetailsRepository,
+    private val repository: DetailsRepository,
     private val placeId: String
-): ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return DetailViewModel(
             repository,

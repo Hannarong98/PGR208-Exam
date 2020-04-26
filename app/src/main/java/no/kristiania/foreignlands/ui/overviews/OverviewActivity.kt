@@ -3,7 +3,6 @@ package no.kristiania.foreignlands.ui.overviews
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels

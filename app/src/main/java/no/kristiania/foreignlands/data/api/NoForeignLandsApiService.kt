@@ -1,8 +1,8 @@
 package no.kristiania.foreignlands.data.api
 
 
-import no.kristiania.foreignlands.data.db.model.overviews.OverviewResponse
 import no.kristiania.foreignlands.data.db.model.details.DetailsResponse
+import no.kristiania.foreignlands.data.db.model.overviews.OverviewResponse
 import no.kristiania.foreignlands.data.utils.NetworkConnectionInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Response

@@ -6,11 +6,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import no.kristiania.foreignlands.data.api.NoForeignLandsApiService
 import no.kristiania.foreignlands.data.db.dao.PlacesDao
-import no.kristiania.foreignlands.data.utils.SafeApiRequest
 import no.kristiania.foreignlands.data.db.model.overviews.Places
 import no.kristiania.foreignlands.data.utils.NoNetworkException
+import no.kristiania.foreignlands.data.utils.SafeApiRequest
 
-class OverviewRepository(private val api: NoForeignLandsApiService, private val dao: PlacesDao) : SafeApiRequest() {
+class OverviewRepository(private val api: NoForeignLandsApiService, private val dao: PlacesDao) :
+    SafeApiRequest() {
 
 
     suspend fun getPlaces(): MutableList<Places>? {
@@ -18,11 +19,12 @@ class OverviewRepository(private val api: NoForeignLandsApiService, private val 
         try {
             return if (dao.getRowCount() > 0) {
 
-                i("Repository", "Fetching local data... row count: ${dao.getRowCount()}" )
+                i("Repository", "Fetching local data... row count: ${dao.getRowCount()}")
 
                 // Time in seconds
-                val sinceLast = (System.currentTimeMillis() / 1000L) - dao.getModifiedAtTimeStamp().toLong()
-                if( sinceLast >= 10800){
+                val sinceLast =
+                    (System.currentTimeMillis() / 1000L) - dao.getModifiedAtTimeStamp().toLong()
+                if (sinceLast >= 10800) {
                     // If three hours passed since we last started the app, then check for new data
                     // This is not the most elegant way to check for new data
                     // But it should be good enough
@@ -37,19 +39,19 @@ class OverviewRepository(private val api: NoForeignLandsApiService, private val 
                 i("Repository", "Persisted ${response.features.size} elements to local storage")
                 response.features
             }
-        } catch (ex: NoNetworkException){
+        } catch (ex: NoNetworkException) {
             e("Repository", "No connection")
         }
         //Just return empty list if other event does not trigger
         return mutableListOf()
     }
 
-    private suspend fun checkForNewData(){
+    private suspend fun checkForNewData() {
         i("Repository", "Checking for new data")
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             val data = apiRequest { api.fetchRemote() }
             val dataSize = data?.features!!.size
-            if(dao.getRowCount() < dataSize){
+            if (dao.getRowCount() < dataSize) {
                 i("Repository", "New data detected: ${dataSize - dao.getRowCount()} elements found")
                 dao.upsert(data.features.toMutableList())
                 dao.updateModifiedTimeStamp((System.currentTimeMillis() / 1000).toString())

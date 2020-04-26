@@ -2,10 +2,12 @@ package no.kristiania.foreignlands.data.db.model.overviews
 
 
 import android.annotation.SuppressLint
-import kotlinx.android.parcel.Parcelize
 import android.os.Parcelable
-import androidx.room.*
-import no.kristiania.foreignlands.data.db.utils.ListTypeConverter
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @SuppressLint("ParcelCreator")
 @Parcelize

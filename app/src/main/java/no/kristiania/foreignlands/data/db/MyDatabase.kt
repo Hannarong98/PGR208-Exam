@@ -22,7 +22,7 @@ abstract class MyDatabase : RoomDatabase() {
         private var instance: MyDatabase? = null
         private val LOCK = Any()
 
-        operator fun invoke(ctx: Context) = instance ?: synchronized(LOCK){
+        operator fun invoke(ctx: Context) = instance ?: synchronized(LOCK) {
             instance ?: buildDb(ctx).also {
                 instance = it
             }

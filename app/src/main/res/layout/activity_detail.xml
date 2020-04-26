@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.details.DetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,24 +43,23 @@
             android:id="@+id/detail_pin_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_margin="4dp"
             android:background="?android:selectableItemBackground"
             android:contentDescription="@string/pin"
-            android:layout_margin="4dp"
             android:src="@drawable/ic_place_orange_24dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/detail_name"
             app:layout_constraintBottom_toBottomOf="@id/detail_name"
-            />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/detail_name" />
 
 
         <TextView
             android:id="@+id/detail_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity= "start"
-            android:textColor="@color/colorBlack"
             android:layout_margin="5dp"
+            android:gravity="start"
             android:padding="25dp"
+            android:textColor="@color/colorBlack"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_name"

@@ -1,8 +1,7 @@
 package no.kristiania.foreignlands
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit ic_splash_logo, which will execute on the development machine (host).

@@ -16,7 +16,7 @@ object ListTypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun toList(value: List<Double>): String {
+    fun fromListToString(value: List<Double>): String {
         val listType = object : TypeToken<List<Double>>() {}.type
         return Gson().toJson(value, listType)
     }

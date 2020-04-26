@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import no.kristiania.foreignlands.data.repository.OverviewRepository
 import no.kristiania.foreignlands.data.db.model.overviews.Places
+import no.kristiania.foreignlands.data.repository.OverviewRepository
 
 
 class OverviewViewModel(private val repository: OverviewRepository) : ViewModel() {
@@ -27,6 +27,6 @@ class OverviewViewModel(private val repository: OverviewRepository) : ViewModel(
     }
 
     val placesList: LiveData<List<Places>>
-    get() = placesLiveData
+        get() = placesLiveData
 
 }

@@ -2,9 +2,9 @@ package no.kristiania.foreignlands.data.db.model.details
 
 
 import android.annotation.SuppressLint
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import android.os.Parcelable
 
 @SuppressLint("ParcelCreator")
 @Parcelize

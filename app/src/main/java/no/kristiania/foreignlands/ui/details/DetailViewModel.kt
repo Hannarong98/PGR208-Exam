@@ -5,12 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 import no.kristiania.foreignlands.data.db.model.details.PlaceDetail
 import no.kristiania.foreignlands.data.repository.DetailsRepository
 
 
-class DetailViewModel(private val repository: DetailsRepository,  private val placeId: String) : ViewModel() {
+class DetailViewModel(private val repository: DetailsRepository, private val placeId: String) :
+    ViewModel() {
 
     // Encapsulated because its mutable
     private val placeDetailLiveData = MutableLiveData<PlaceDetail>()
@@ -24,5 +25,5 @@ class DetailViewModel(private val repository: DetailsRepository,  private val pl
     }
 
     val detail: LiveData<PlaceDetail>
-    get() = placeDetailLiveData
+        get() = placeDetailLiveData
 }
