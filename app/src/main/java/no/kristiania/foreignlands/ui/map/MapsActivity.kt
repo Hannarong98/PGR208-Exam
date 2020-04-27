@@ -45,7 +45,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             MarkerOptions()
                 .position(it)
                 .title(placeName)
-                .snippet("${placeCord.latitude}, ${placeCord.latitude}")
+                .snippet("${placeCord.latitude}, ${placeCord.longitude}")
         }).showInfoWindow()
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeCord, 14f), 3000, null)
     }
