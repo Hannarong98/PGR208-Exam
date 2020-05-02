@@ -14,7 +14,7 @@ class OverviewRepository(private val api: NoForeignLandsApiService, private val 
     SafeApiRequest() {
 
 
-    suspend fun getPlaces(): MutableList<Places>? {
+    suspend fun getPlaces(): List<Places> {
         //Checking row count should be more efficient than checking list size
         try {
             return if (dao.getRowCount() > 0) {
@@ -35,7 +35,7 @@ class OverviewRepository(private val api: NoForeignLandsApiService, private val 
             } else {
                 i("Repository", "No data in local storage, trying to fetching from remote")
                 val response = apiRequest { api.fetchRemote() }
-                dao.upsert(response?.features!!.toMutableList())
+                dao.upsert(response?.features!!.toList())
                 i("Repository", "Persisted ${response.features.size} elements to local storage")
                 response.features
             }

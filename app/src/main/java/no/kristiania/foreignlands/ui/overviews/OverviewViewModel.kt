@@ -1,32 +1,16 @@
 package no.kristiania.foreignlands.ui.overviews
 
 
-import android.util.Log.i
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
-import no.kristiania.foreignlands.data.db.model.overviews.Places
+import androidx.lifecycle.liveData
 import no.kristiania.foreignlands.data.repository.OverviewRepository
 
 
 class OverviewViewModel(private val repository: OverviewRepository) : ViewModel() {
-
-    // Encapsulated because its mutable
-    private val placesLiveData = MutableLiveData<List<Places>>()
-
-    // Should only be called once
-    // Even if configuration changes happens
-    init {
-        i("Overview VM", "Requesting data from repository")
-        viewModelScope.launch {
-            val places = repository.getPlaces()
-            placesLiveData.postValue(places)
-        }
+    val placesList = liveData {
+        Log.i("Overview VM", "Requesting data from repository")
+        emit(repository.getPlaces())
     }
-
-    val placesList: LiveData<List<Places>>
-        get() = placesLiveData
-
 }
+

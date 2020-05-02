@@ -9,13 +9,13 @@ interface PlacesDao {
 
     @Transaction
     @Query("SELECT * FROM PLACES")
-    suspend fun fetchLocal(): MutableList<Places>
+    suspend fun fetchLocal(): List<Places>
 
     @Query("SELECT COUNT(name) from PLACES")
     suspend fun getRowCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(places: MutableList<Places>)
+    suspend fun upsert(places: List<Places>)
 
     @Query("UPDATE places set timestampSeconds= :newTimeStamp")
     suspend fun updateModifiedTimeStamp(newTimeStamp: String)
