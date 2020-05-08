@@ -11,6 +11,6 @@ Framework library and other stuff used:
 * [x] Room
 * [x] Coroutines
 * [x] Glide
-* [x] Kotlin Synthetic
+* [x] Kotlin Synthetic "Couldve gone for data binding instead :/"
 * [x] LiveData
 * [x] LeakCanary
