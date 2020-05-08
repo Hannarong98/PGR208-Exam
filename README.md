@@ -4,11 +4,13 @@ Simple navigation app with different type of views / screen such as:
 
 Scrollview, Recyclerview, Mapview
 
-Framework and library used:
+Framework library and other stuff used:
 
+* [x] MVVM
 * [x] Retrofit
 * [x] Room
 * [x] Coroutines
 * [x] Glide
-* [x] KTX and LiveData
+* [x] Kotlin Synthetic
+* [x] LiveData
 * [x] LeakCanary
