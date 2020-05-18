@@ -1,6 +1,6 @@
 # PGR208_Exam
 
-Simple navigation app with different type of views / screen such as:
+Simple app that consumes an api and its data are displayed by different type of views / screen such as:
 
 Scrollview, Recyclerview, Mapview
 
