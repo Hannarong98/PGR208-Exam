@@ -15,7 +15,7 @@ interface NoForeignLandsApiService {
     @GET("/home/api/v1/places")
     suspend fun fetchRemote(): Response<OverviewResponse>
 
-    @GET("home/api/v1/place")
+    @GET("/home/api/v1/place")
     suspend fun fetchRemoteDetail(@Query("placeId") id: String): Response<DetailsResponse>
 
     companion object {
