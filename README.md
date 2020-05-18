@@ -1,5 +1,6 @@
 # PGR208_Exam
 
+Exam at Android Programming given at Høyskolen Kristiania Spring 2020
 
 Simple app that consumes an api and its data are displayed by different type of views / screen such as:
 
