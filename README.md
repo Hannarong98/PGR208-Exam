@@ -4,7 +4,7 @@ Exam at Android Programming given at Høyskolen Kristiania Spring 2020
 
 ### About the app
 
-Its an simple app that consumes an api and its data are displayed by different type of views / screen such as:
+Its a simple app that consumes an api and its data are displayed by different type of views / screen such as:
 
 Scrollview, Recyclerview, Mapview
 
