@@ -9,11 +9,11 @@ The api is provided by: [Noforeignland](https://www.noforeignland.com)
 
 Framework library and other stuff used:
 
-* [x] MVVM
-* [x] Retrofit
-* [x] Room
-* [x] Coroutines
-* [x] Glide
-* [x] Kotlin Synthetic "Couldve gone for data binding instead :/"
-* [x] LiveData
-* [x] LeakCanary
+* MVVM
+* Retrofit
+* Room
+* Coroutines
+* Glide
+* Kotlin Synthetic "Couldve gone for data binding instead :/"
+* LiveData
+* LeakCanary
