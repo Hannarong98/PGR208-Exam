@@ -15,19 +15,18 @@ class OverviewRepository(private val api: NoForeignLandsApiService, private val 
 
 
     suspend fun getPlaces(): List<Places> {
-        //Checking row count should be more efficient than checking list size
         try {
             return if (dao.getRowCount() > 0) {
 
                 i("Repository", "Fetching local data... row count: ${dao.getRowCount()}")
 
                 // Time in seconds
+                // If three hours passed since we last started the app, then check for new data
+                // This is not the most elegant way to check for new data
+                // But it should be good enough
                 val sinceLast =
                     (System.currentTimeMillis() / 1000L) - dao.getModifiedAtTimeStamp().toLong()
                 if (sinceLast >= 10800) {
-                    // If three hours passed since we last started the app, then check for new data
-                    // This is not the most elegant way to check for new data
-                    // But it should be good enough
                     checkForNewData()
                 }
 
@@ -52,11 +51,11 @@ class OverviewRepository(private val api: NoForeignLandsApiService, private val 
             val data = apiRequest { api.fetchRemote() }
             val dataSize = data?.features!!.size
             if (dao.getRowCount() < dataSize) {
-                i("Repository", "New data detected: ${dataSize - dao.getRowCount()} elements found")
+                i("Repository", "New entries found, counted: ${dataSize - dao.getRowCount()} entries")
                 dao.upsert(data.features.toMutableList())
                 dao.updateModifiedTimeStamp((System.currentTimeMillis() / 1000).toString())
             } else {
-                i("Repository", "Local is one to one with remote")
+                i("Repository", "No new entry found, skipped fetching")
             }
         }
     }
