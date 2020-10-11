@@ -33,7 +33,7 @@ abstract class MyDatabase : RoomDatabase() {
                 ctx.applicationContext,
                 MyDatabase::class.java,
                 "MyDb.db"
-            ).fallbackToDestructiveMigration().build()
+            ).build()
     }
 
 }
