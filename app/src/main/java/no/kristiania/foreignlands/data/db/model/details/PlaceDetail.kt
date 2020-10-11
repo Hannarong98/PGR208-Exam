@@ -15,8 +15,6 @@ data class PlaceDetail(
     val comments: String,
     @SerializedName("id")
     val id: Long,
-    @SerializedName("images")
-    val images: List<Image>,
     @SerializedName("lat")
     val lon: Double,
     @SerializedName("lon")
